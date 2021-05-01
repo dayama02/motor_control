@@ -7,8 +7,12 @@
     <!-- cartographer -->
     <include file="$(find cartographer_ros)/launch/cartographer.launch"/>
 
+    <!-- mapサーバー -->
+    <arg name="map_file" default="$(find motor_control)/map/bed_room.yaml"/>　<!--マップファイルのパスの指定 -->
+    <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+
     <!-- motor_control -->
-    <node pkg="motor_control" type="motor_control_node" name="motor_control"/>
+    <node pkg="motor_control" type="motor_control_node" name="motor_control" output="screen"/>
     <!-- move base -->
     <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
         <rosparam file="$(find motor_control)/params/move_base_params.yaml" command="load" />

@@ -31,7 +31,7 @@ WheelVelocity CalcWheelVelocity(double k, double x, double y){
 // コールバック関数。並進、回転速度の表示。
 void callback(const geometry_msgs::Twist::ConstPtr &vel)
 {
-  ROS_INFO("callback");
+  ROS_INFO("x, %1.1f, z, %1.1f", vel->linear.x, vel->angular.z);
   WheelVelocity wv = CalcWheelVelocity(320, vel->angular.z, vel->linear.x);
   
   int v_l = round(wv.v_l);
